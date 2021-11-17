@@ -31,11 +31,20 @@ class LoginModel {
         this.loginForm['password'] = password;
     }
 
-    validateFormulary() {
-        if (!this.loginForm.user) {
-            return 1;
-        } else if (!this.loginForm.password) {
-            return 2;
+    validateFormulary(form) {
+        let formType = this.signUpForm; 
+        let counter = 1;
+
+        if(form === 'login'){
+            formType = this.loginForm;
+        }
+
+        for(const key in formType){
+            if(!formType[key]){
+                return counter;
+            }
+
+            counter++;
         }
 
         return -1;
@@ -48,24 +57,28 @@ class LoginModel {
 
         return false;
     }
+
+    getLoginForm(){
+        return this.loginForm;
+    }
 }
 
 class LoginView {
     constructor() {
-        this.controller = null;
         this.user = document.querySelector('.user');
         this.password = document.querySelector('.password');
         this.form = document.querySelector('#form');
+        this.formElements = Array.from(this.form.children);
     }
 
     validInput(input){
         input.parentNode.classList.remove('error');
     }
 
-    invalidInput(input){
+    invalidInput(validation){
         this.clearErrors();
-        input.parentNode.classList.add('error');
-        input.focus();
+        this.formElements[validation -1].classList.add('error');
+        this.formElements[validation -1].getElementsByTagName('input')[0].focus();
     }
 
     getUser() {
@@ -81,8 +94,7 @@ class LoginView {
     }
 
     clearErrors(){
-       const formElements = Array.from(this.form.children);
-       formElements.forEach(formElement => formElement.classList.remove('error'));
+       this.formElements.forEach(formElement => formElement.classList.remove('error'));
     }
 
 }
@@ -122,18 +134,11 @@ class LoginController {
 
     checkFilledInputs() {
         const validation = this.getValidationNumber();
-        const user = this.view.getUser();
-        const pass = this.view.getPassword();
 
-        if (validation === 1) {
-            this.view.invalidInput(user);
-
+        if (validation > 0) {
+            this.view.invalidInput(validation);
             return false;
-        } else if (validation === 2) {
-            this.view.invalidInput(pass);
-            
-            return false;
-        }
+        } 
 
         return true;
     }
@@ -143,7 +148,7 @@ class LoginController {
     }
 
     getValidationNumber() {
-        return this.model.validateFormulary();
+        return this.model.validateFormulary('login');
     }
 
     getForm(){
