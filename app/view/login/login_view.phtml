@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>ticket-application</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../app/view/login/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../app/view/login/css/login.css">
+    <script src="../app/view/login/js/login.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1 class="d-none">Gestor de tickets</h1>
+    </header>
+    <main class="wh-100 flex-center">
+        <section class="login flex">
+            <div class="login__image">
+                <img src="../app/view/login/img/boats_image.jpg" class="wh-100" alt="image">
+            </div> 
+            <div class="login__form">
+                <div class="login__form-container">
+                <div class="login__form-login wh-100" >
+                    <div class="container">
+                        <div class="login__logo">
+                            <img src="../app/view/login/img/ticket.svg" class="login__ticket">
+                            <span>Gestor de tickets</span> 
+                        </div>
+                        <form id="form">
+                            <div class="login__element">
+                                <label class="login__label">Usuario</label>
+                                <input type="text" class="login__input user w-100" placeholder="Tu nombre de usuario">
+                                <span class="error_box">Rellene este campo</span>
+                            </div>
+                            <div class="login__element">
+                                <label class="login__label">Contraseña</label>
+                                <input type="password" class="login__input password w-100" placeholder="Tu contraseña">
+                                <a href="#" class="login__forgot w-100">He olvidado mi constraseña</a>
+                                <span class="error_box">Rellene este campo</span>
+                            </div>
+                            <div class="login__element">
+                                <input type="submit" value="Entrar" class="login__input btn">
+                                <a href="#" class="login__signup btn">Registrarse</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="login__form-signup wh-100">
+                    <div class="container">
+                        <div class="login__logo">
+                            <img src="../app/view/login/img/ticket.svg" class="login__ticket">
+                            <span>Gestor de tickets</span> 
+                        </div>
+                        <form id="login__register">
+                            <div class="login__element">
+                                <label class="login__label">Nombre de usuario*</label>
+                                <input type="text" class="login__input user w-100">
+                            </div>
+                            <div class="login__element">
+                                <label class="login__label">E-mail*</label>
+                                <input type="text" class="login__input w-100 email">
+                            </div>
+                            <div class="login__element">
+                                <label class="login__label">Contraseña*</label>
+                                <input type="password" class="login__input password w-100">
+                            </div>
+                            <div class="login__element">
+                                <label class="login__label">Repita su contraseña*</label>
+                                <input type="password" class="login__input password w-100">
+                            </div>
+                            <div class="login__element">
+                                <label class="login__label">Código de rol*</label>
+                                <input type="text" class="login__input w-100 rol">
+                            </div>
+                            <div class="login__element">
+                                <input type="submit" value="Registrarse" class="login__input btn" id="cancel">
+                                <button type="button" class="btn btn-cancel">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                </div>
+                
+            </div>
+        </section>
+    </main>
+</body>
+</html>

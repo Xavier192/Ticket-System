@@ -1,0 +1,275 @@
+/*INDEX
+* 1. prestyling
+* 
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant&family=Poppins&display=swap');
+
+/*PRESTYLING AND VARIABLES*/
+
+:root{
+    --text-color:#3a3a3a;
+    --background-color:#4a4a4a;
+    --login-button-color:#048ABF;
+    --sign-up-button-color:#F2921D;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    color:var(--text-color);
+    font-size:16px;
+}
+
+a{
+    text-decoration:none;
+}
+
+/*SECTION LOGIN*/
+
+main{
+   background-color:var(--background-color);
+}
+
+.login{
+    height:700px;
+    background-color:#fff;
+    max-width:1200px;
+    margin:0 20px;
+    border-radius:10px;
+}
+
+/*DIRECT CHILDS OF LOGIN SECTION*/
+
+.login__image{
+    flex:1.2;
+}
+
+.login__form{
+    flex:1;
+    position:relative;
+    overflow:hidden;
+}
+
+.login__form-container{
+    transition:transform .5s ease-in-out;
+}
+
+.login__form-login, .login__form-signup{
+    position:absolute;
+}
+
+/*LOGIN IMAGE <IMG>*/
+
+.login__image img{
+    object-fit:cover;
+    border-radius:10px 0 0 10px;
+}
+
+/*LOGIN FORM LOGO*/
+
+.login__logo{
+    display:flex;
+    align-items:center;
+    margin-top:60px;
+    font-weight:500;
+}
+
+.login__logo span{
+    font-size:30px;
+    margin-left:10px;
+    margin-top:3.5px;
+}
+
+.login__ticket{
+    width:30px;
+}
+
+/*LOGIN FORM FORMULARY*/
+
+#form{
+    margin-top:100px;
+}
+
+.login__element{
+    margin-bottom:30px;
+    position:relative;
+}
+
+.login__element:last-child{
+    display:flex;
+    column-gap:20px;
+}
+
+.login__input{
+    padding:15px;
+    padding-left:45px;
+    border:none;
+    background-color:#f3f3f3;
+    background-repeat:no-repeat;
+    background-position: center left 3%;
+    outline:2px solid transparent;
+    transition:outline-color .3s;
+    border-radius:5px;
+}
+
+.user{
+    background-image: url('../img/user-solid.svg');
+}
+
+.password{
+    background-image:url('../img/key-solid.svg');
+}
+
+.login__input:focus{
+    outline-color:#048ABF;
+}
+
+.login__label{
+    display:block;
+    margin-bottom:12px;
+}
+
+.login__forgot{
+    display:inline-block;
+    text-align:right;
+    margin-top:10px;
+    font-size:14px;
+}
+
+.login__input[type="submit"]{
+    background-color:var(--login-button-color);
+    color:#fff;
+}
+
+.login__input[type="submit"]:hover{
+    background-color:#047baa;
+}
+
+.login__input[type="submit"]:focus{
+    outline:none;
+    border:none;
+}
+
+.login__signup{
+    color:var(--text-color);
+    border:2px solid #e1e1e1;
+}
+
+.login__signup:hover{
+    background-color:var(--sign-up-button-color);
+    border-color:var(--sign-up-button-color);
+    color:#fff;
+}
+
+.email{
+    background-image:url(../img/email.svg);
+}
+
+.rol{
+    background-image:url(../img/code.svg);
+}
+
+/*SIGN UP FORMULARY*/
+
+.login__form-signup .login__input{
+    padding:10px;
+    padding-left:45px;
+}
+
+.login__form-signup .login__element{
+    margin-bottom:15px;
+}
+
+.login__form-signup .login__logo {
+    margin-top:40px;
+}
+
+#login__register{
+    margin-top:50px;
+}
+
+#cancel{
+    padding:13px 15px;
+}
+
+/*UTILITIES*/
+
+.flex{
+    display:flex;
+    justify-content:center;
+}
+
+.flex-center{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    max-width:440px;
+    margin:auto;
+    height:100%;
+    padding:0 20px;
+}
+
+.wh-100{
+    width:100%;
+    height:100%;
+}
+
+.w-100{
+    width:100%;
+}
+
+.d-none{
+    display:none;
+}
+
+.btn{
+    flex:1;
+    border-radius:5px;
+    font-weight:600;
+    cursor:pointer;
+    margin-top:15px;
+    padding:13px 15px;
+    text-align: center;
+    font-size:18px;
+    transition:background-color .3s, border-color .2s;
+}
+
+.btn-cancel{
+    background-color:transparent;
+    border:2px solid #e1e1e1;
+}
+
+.btn-cancel:hover{
+    background-color:#e1e1e1;
+}
+
+.error input{
+    outline-color: rgb(233, 15, 15);
+    position:relative;
+}
+
+.error .error_box{
+    display:block;
+}
+
+.error_box{
+    display:none;
+    position:absolute;
+    left:0;
+    top:95px;
+    background-color:#fff;
+    border-radius:12px;
+    z-index:9;
+    font-size:14px;
+    padding:10px;
+    box-shadow:0 0 10px #afafaf;
+}
