@@ -17,8 +17,26 @@ class LoginModel{
         $this->password = $password;
     }
 
-    function login(){
+    function prepareStatment($statment){
+        return $this->db -> prepare($statment); 
+    }
+
+    function query($queryContent, $params){
+        $preparedStatment = $this->prepareStatment($queryContent);
+        $preparedStatment->execute($params);
+
+        return $preparedStatment -> FetchAll();
+    }
+
+    function login($user, $password){
+        $result = $this->query('SELECT alias from usuario WHERE alias = ? and contrasenya = ? LIMIT 1', array($user,$password));
         
+        if($result){
+            echo true;
+            return;
+        }
+
+        echo false;
     }
 
 }

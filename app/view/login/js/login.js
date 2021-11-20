@@ -58,6 +58,18 @@ class LoginModel {
         return -1;
     }
 
+    convertObjectToParams(formType){
+        let form = this.decideForm(formType);
+        let convertedString = '';
+
+        for(const key in form){
+            convertedString +=key+'='+form[key]+'&'; 
+        }
+
+        
+        return convertedString.substring(0, convertedString.length - 1);
+    }
+
     emptyInput(input) {
         if (input.value === '') {
             return true;
@@ -156,7 +168,8 @@ class LoginController {
     }
 
     validateLogin() {
-        const params = [this.view.getLoginInputs()[0].value, this.view.getLoginInputs()[1].value];
+        let params = this.model.convertObjectToParams('login');
+        params+= '&type=login';
 
         if (this.checkFilledInputs('login')) {
             this.httpRequest('../app/controller/ajax_controller.php', params);
@@ -168,6 +181,7 @@ class LoginController {
         const xhr = new XMLHttpRequest();
 
         xhr.open('POST', url, true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
         xhr.onload = function () {
             if (this.status === 200) {
@@ -175,7 +189,7 @@ class LoginController {
             }
         }
 
-        xhr.send();
+        xhr.send(params);
     }
 
     checkFilledInputs(target) {
@@ -208,7 +222,6 @@ class LoginController {
     }
 
 }
-
 
 const EventControl = function () {
     const controller = new LoginController(new LoginView(), new LoginModel());
