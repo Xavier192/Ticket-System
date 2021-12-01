@@ -194,6 +194,10 @@ main{
     margin-top:50px;
 }
 
+#login__register .error_box{
+    top:80px;
+}
+
 #cancel{
     padding:13px 15px;
 }

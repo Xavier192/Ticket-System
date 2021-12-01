@@ -19,128 +19,190 @@ window.onload = function () {
     }
 }
 
+class Event {
+    constructor() {
+        this.listeners = [];
+    }
+
+    addListener(listener) {
+        this.listeners.push(listener);
+    }
+
+    trigger(params, formType) {
+        this.listeners.forEach(listener => { listener(params, formType) });
+    }
+}
 
 class LoginModel {
     constructor() {
-        this.loginForm = { 'user': '', 'password': '' };
-        this.signUpForm = { 'user': '', 'email': '', 'password': '', 'repeatedPassword': '', 'rolCode': '' };
+        this.validationMessages = {
+            loginForm: { 'user': '', 'password': '' },
+            signupForm: { 'user': '', 'email': '', 'password': '', 'repeatedPassword': '', 'rolCode': '' }
+        };
+
+        this.loginValidation = new Event();
     }
 
-    addForm(formType, params) {
-        let form = this.decideForm(formType);
-        let counter = 0;
+    validate(form, formType) {
+
+        if (formType === 'signup') {
+            this.resetValidation(this.validationMessages.signupForm);
+
+            if (!this.validateSignUp(form, this.validationMessages.signupForm)) {
+                this.loginValidation.trigger(this.validationMessages.signupForm);
+            }
+
+        } else {
+            this.resetValidation(this.validationMessages.loginForm);
+
+            if (!this.validateLogin(form, this.validationMessages.loginForm)) {
+                this.loginValidation.trigger(this.validationMessages.loginForm);
+            }
+        }
+
+    }
+
+    resetValidation(formValidation) {
+        for (const key in formValidation) {
+            formValidation[key] = '';
+        }
+    }
+
+    validateLogin(form, formValidation) {
+        const userValidation = new RegExp("^[a-zA-Z0-9]+$");
+
+        if (!this.validateEmptyInputs(form, formValidation)) {
+            return false;
+        }
+
+        if (!userValidation.test(form.user)) {
+            formValidation.user = 'Nombre de usuario no válido (a-z, 0-9)';
+            return false;
+        }
+
+        return true;
+    }
+
+    validateSignUp(form, formValidation) {
+        const passwordValidation = new RegExp("(?=.{8,})");
+        const userValidation = new RegExp("^[a-zA-Z0-9]+$");
+
+        if (!this.validateEmptyInputs(form, formValidation)) {
+            return false;
+        }
+
+        if (!userValidation.test(form.user)) {
+            formValidation.user = 'Nombre de usuario no válido (a-z, 0-9)';
+            return false;
+        }
+
+        if (form.password != form.repeatedPassword) {
+            formValidation.password = 'Las contraseñas no coinciden';
+            return false;
+        }
+
+        if (!passwordValidation.test(form.password)) {
+            formValidation.password = 'La contraseña debe tener 8 carácteres mínimo';
+            return false;
+        }
+
+        return true;
+    }
+
+    validateEmptyInputs(form, formValidation) {
 
         for (const key in form) {
-            form[key] = params[counter].value;
-            counter++;
-        }
-    }
-
-    decideForm(form) {
-        if (form === 'login') {
-            return this.loginForm;
-        }
-
-        return this.signUpForm;
-    }
-
-    validateFormulary(form) {
-        let formType = this.decideForm(form);
-        let counter = 1;
-
-        for (const key in formType) {
-            if (!formType[key]) {
-                return counter;
+            if (form[key] === "") {
+                formValidation[key] = "Rellene este campo";
+                return false;
             }
-            counter++;
         }
 
-        return -1;
-    }
-
-    convertObjectToParams(formType){
-        let form = this.decideForm(formType);
-        let convertedString = '';
-
-        for(const key in form){
-            convertedString +=key+'='+form[key]+'&'; 
-        }
-
-        
-        return convertedString.substring(0, convertedString.length - 1);
-    }
-
-    emptyInput(input) {
-        if (input.value === '') {
-            return true;
-        }
-
-        return false;
-    }
-
-    getLoginForm() {
-        return this.loginForm;
-    }
-
-    getSignUpForm() {
-        return this.signUpForm;
+        return true;
     }
 }
 
 class LoginView {
     constructor() {
         this.loginForm = document.querySelector('#form');
-        this.loginFormElements = Array.from(this.loginForm.children);
-
         this.signUpForm = document.querySelector('#login__register');
-        this.signUpFormElements = Array.from(this.signUpForm.children);
+
+        this.loginSubmitEvent = new Event();
     }
 
-    validInput(input) {
-        input.parentNode.classList.remove('error');
+    init() {
+
+        this.loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.loginSubmitEvent.trigger(this.getLoginObject(), 'login');
+        });
+
+        this.signUpForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.loginSubmitEvent.trigger(this.getSignUpObject(), 'signup');
+        });
+
+        this.loginForm.addEventListener('keyup', (e) => {
+            this.removeError(e);
+        });
+
+
+        this.signUpForm.addEventListener('keyup', (e) => {
+            this.removeError(e);
+        });
+
     }
 
-    invalidInput(validation, target) {
-        let form = this.targetForm(target);
-        this.clearErrors(form);
-        this.setError(form[validation - 1]);
-        this.focusInput(form[validation - 1].getElementsByTagName('input')[0]);
+    removeError(e){
+        if (e.target.value) {
+            e.target.parentNode.classList.remove('error');
+        }
     }
 
-    focusInput(input) {
-        input.focus();
+    getLoginObject() {
+        const loginValues = Array.from(this.loginForm.querySelectorAll('input'));
+
+        return { user: loginValues[0].value, password: loginValues[1].value };
     }
 
-    setError(element) {
-        element.classList.add('error');
+    getSignUpObject() {
+        const signUpValues = Array.from(this.signUpForm.querySelectorAll('input'));
+
+        return {
+            user: signUpValues[0].value, email: signUpValues[1].value,
+            password: signUpValues[2].value, repeatedPassword: signUpValues[3].value,
+            rolCode: signUpValues[4].value
+        };
+
     }
 
-    targetForm(form) {
-        if (form === 'signup') {
-            return this.signUpFormElements;
+    updateValidation(formValidation) {
+        let login = this.loginForm.querySelectorAll('.error_box');
+        let counter = 0;
+
+        if (Object.keys(formValidation).length > 2) {
+            login = this.signUpForm.querySelectorAll('.error_box');
         }
 
-        return this.loginFormElements;
+        login.forEach(error => { error.parentNode.classList.remove('error') });
+
+        counter = this.addTextError(formValidation, login);
+
+        login[counter].parentNode.classList.add('error');
+        login[counter].parentNode.querySelector('input').focus();
     }
 
-    getLoginForm() {
-        return this.loginForm;
-    }
+    addTextError(formValidation,login) {
+        let counter = 0;
 
-    getSignUpForm() {
-        return this.signUpForm;
-    }
+        for (const key in formValidation) {
+            if (formValidation[key]) {
+                login[counter].innerHTML = formValidation[key];
+                return counter;
+            }
 
-    clearErrors(targetForm) {
-        targetForm.forEach(formElement => formElement.classList.remove('error'));
-    }
-
-    getSignUpInputs() {
-        return this.signUpForm.getElementsByTagName('input');
-    }
-
-    getLoginInputs() {
-        return this.loginForm.getElementsByTagName('input');
+            counter++;
+        }
     }
 
 }
@@ -149,106 +211,22 @@ class LoginController {
     constructor(view, model) {
         this.view = view;
         this.model = model;
+
+        this.view.loginSubmitEvent.addListener((data, formType) => { this.model.validate(data, formType) });
+        this.model.loginValidation.addListener(data => {this.view.updateValidation(data)});
     }
 
-    login() {
-        this.model.addForm('login', this.view.getLoginInputs());
-        this.validateLogin();
-    }
-
-    signUp() {
-        this.model.addForm('signup', this.view.getSignUpInputs());
-        this.validateSignUp();
-    }
-
-    validateSignUp() {
-        if (this.checkFilledInputs('signup')) {
-            console.log('Hola');
-        }
-    }
-
-    validateLogin() {
-        let params = this.model.convertObjectToParams('login');
-        params+= '&type=login';
-
-        if (this.checkFilledInputs('login')) {
-            this.httpRequest('../app/controller/ajax_controller.php', params);
-        }
-
-    }
-
-    httpRequest(url, params = '') {
-        const xhr = new XMLHttpRequest();
-
-        xhr.open('POST', url, true);
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-        xhr.onload = function () {
-            if (this.status === 200) {
-                console.log(this.responseText);
-            }
-        }
-
-        xhr.send(params);
-    }
-
-    checkFilledInputs(target) {
-        const validation = this.getValidationNumber(target);
-
-        if (validation > 0) {
-            this.view.invalidInput(validation, target);
-            return false;
-        }
-
-        return true;
-    }
-
-    checkInput(input) {
-        if(!this.model.emptyInput(input)){
-            this.view.validInput(input);
-        }
-    }
-
-    getValidationNumber(target) {
-        return this.model.validateFormulary(target);
-    }
-
-    getLoginForm() {
-        return this.view.getLoginForm();
-    }
-
-    getSignUpForm() {
-        return this.view.getSignUpForm();
+    renderView() {
+        this.view.init();
     }
 
 }
 
-const EventControl = function () {
-    const controller = new LoginController(new LoginView(), new LoginModel());
+const controller = new LoginController(new LoginView(), new LoginModel());
 
-    /*LOGIN FORM VALIDATION AND SUBMIT*/
+controller.renderView();
 
-    controller.getLoginForm().onsubmit = function (e) {
-        e.preventDefault();
-        controller.login();
-    }
 
-    controller.getLoginForm().onkeyup = function (e) {
-        controller.checkInput(e.target);
-    }
-
-    /*SIGN UP FORM VALIDATION AND SUBMIT*/
-
-    controller.getSignUpForm().onsubmit = function (e) {
-        e.preventDefault();
-        controller.signUp();
-    }
-
-    controller.getSignUpForm().onkeyup = function (e) {
-        controller.checkInput(e.target);
-    }
-
-}();
 
 
 

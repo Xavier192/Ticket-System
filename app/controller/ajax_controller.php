@@ -7,18 +7,15 @@ require APPLICATION_PATH .DS. '..'.DS. 'config\config.php';
 require APPLICATION_PATH .DS . '..' . DS . 'lib\conexion.php';
 
 if(isset($_POST['type'])){
-    decideController($_POST['type']);
+    decideController($_POST['type'], $_POST['operation']);
 }
 
-function decideController($type){
+function decideController($type, $operation){
     global $config;
+    
+    $loginPath = $config['path']['CONTROLLER_PATH']. DS . 'login_controller.php';
 
-    switch($type){
-        case 'login':
-            require $config['path']['CONTROLLER_PATH']. DS . 'login_controller.php';
-        break;
-        case 'signup':
-            
-        break;
-    }
+    $dictionary = ['login'=> $loginPath];
+
+    require $dictionary[$type];
 }

@@ -28,6 +28,22 @@ class LoginModel{
         return $preparedStatment -> FetchAll();
     }
 
+    function verifyCode($code){
+        $result = $this->query('SELECT id_codigo from codigo WHERE id_codigo = ?', array($code));
+
+        if($result){
+            echo true;
+            return;
+        }
+        
+        echo false;
+    }
+
+    function signUp($user, $password, $email, $code){
+        
+        $result = $this -> query('INSERT INTO usuario VALUES(0,?,?,?)');
+    }
+
     function login($user, $password){
         $result = $this->query('SELECT alias from usuario WHERE alias = ? and contrasenya = ? LIMIT 1', array($user,$password));
         
@@ -36,7 +52,7 @@ class LoginModel{
             return;
         }
 
-        echo false;
+        echo 'No te sabes la palabra magica jajjaja';
     }
 
 }
