@@ -41,25 +41,17 @@ class LoginModel {
         };
 
         this.loginValidation = new Event();
+        this.loginSubmit = new Event();
     }
 
     validate(form, formType) {
 
         if (formType === 'signup') {
-            this.resetValidation(this.validationMessages.signupForm);
+            this.validateSignUp(form);
+            return;
+        } 
 
-            if (!this.validateSignUp(form, this.validationMessages.signupForm)) {
-                this.loginValidation.trigger(this.validationMessages.signupForm);
-            }
-
-        } else {
-            this.resetValidation(this.validationMessages.loginForm);
-
-            if (!this.validateLogin(form, this.validationMessages.loginForm)) {
-                this.loginValidation.trigger(this.validationMessages.loginForm);
-            }
-        }
-
+        this.validateLogin(form);
     }
 
     resetValidation(formValidation) {
@@ -68,7 +60,29 @@ class LoginModel {
         }
     }
 
-    validateLogin(form, formValidation) {
+    validateLogin(form) {
+        this.resetValidation(this.validationMessages.loginForm);
+
+        if (!this.validateLoginForm(form, this.validationMessages.loginForm)) {
+            this.loginValidation.trigger(this.validationMessages.loginForm);
+            return;
+        }
+
+        this.sendData({user:form.user, password:form.password, type:'login', operation:'login'}, this.setLoginValidation.bind(this));
+    }
+
+    validateSignUp(form) {
+        this.resetValidation(this.validationMessages.signupForm);
+    
+        if (!this.validateSignUpForm(form, this.validationMessages.signupForm)) {
+            this.loginValidation.trigger(this.validationMessages.signupForm);
+            return;
+        }
+        
+        this.sendData({code:form.rolCode,user:form.user, type:'login', operation:'verify'},this.setError.bind(this), form);
+    }
+
+    validateLoginForm(form, formValidation) {
         const userValidation = new RegExp("^[a-zA-Z0-9]+$");
 
         if (!this.validateEmptyInputs(form, formValidation)) {
@@ -83,7 +97,7 @@ class LoginModel {
         return true;
     }
 
-    validateSignUp(form, formValidation) {
+    validateSignUpForm(form, formValidation) {
         const passwordValidation = new RegExp("(?=.{8,})");
         const userValidation = new RegExp("^[a-zA-Z0-9]+$");
 
@@ -107,6 +121,56 @@ class LoginModel {
         }
 
         return true;
+    }
+
+
+    sendData(data, callback, form){
+        const formData = this.getFormDataToSend(data);
+        
+        fetch('../app/controller/ajax_controller.php', {
+            method: 'POST',
+            body: formData
+        }).then(res => {
+            return res.text();
+        }).then(data => {
+            callback(data, form);
+        }).catch(error => console.log(error));
+    }
+
+
+
+    setError(data, form) {
+        if (data) {
+            if (data === "1") {
+                this.validationMessages.signupForm.rolCode = 'Cógido no válido';
+            } if (data === "2") {
+                this.validationMessages.signupForm.user = 'Usuario no válido';
+            }
+            this.loginValidation.trigger(this.validationMessages.signupForm);
+            return;
+        }
+        
+        this.sendData({type:'login', operation: 'signup', user:form.user, password:form.password, email: form.email, code: form.rolCode}, function(data, form){window.location.replace('')}, form);
+    }
+
+    setLoginValidation(data, form){
+
+        if(data === '1'){
+            console.log('Login');
+        }else{
+            this.loginSubmit.trigger();
+        }
+
+    }
+
+    getFormDataToSend(object) {
+        const formData = new FormData();
+
+        for (const key in object) {
+            formData.append(key, object[key]);
+        }
+
+        return formData;
     }
 
     validateEmptyInputs(form, formValidation) {
@@ -153,7 +217,13 @@ class LoginView {
 
     }
 
-    removeError(e){
+    setLoginError(){
+        let loginError = this.loginForm.querySelector('#failed-login');
+
+        loginError.classList.remove('d-none');
+    }
+
+    removeError(e) {
         if (e.target.value) {
             e.target.parentNode.classList.remove('error');
         }
@@ -177,12 +247,8 @@ class LoginView {
     }
 
     updateValidation(formValidation) {
-        let login = this.loginForm.querySelectorAll('.error_box');
+        let login = this.decideForm(formValidation);
         let counter = 0;
-
-        if (Object.keys(formValidation).length > 2) {
-            login = this.signUpForm.querySelectorAll('.error_box');
-        }
 
         login.forEach(error => { error.parentNode.classList.remove('error') });
 
@@ -192,7 +258,17 @@ class LoginView {
         login[counter].parentNode.querySelector('input').focus();
     }
 
-    addTextError(formValidation,login) {
+    decideForm(formValidation) {
+        let login = this.loginForm.querySelectorAll('.error_box');
+
+        if (Object.keys(formValidation).length > 2) {
+            login = this.signUpForm.querySelectorAll('.error_box');
+        }
+
+        return login;
+    }
+
+    addTextError(formValidation, login) {
         let counter = 0;
 
         for (const key in formValidation) {
@@ -213,7 +289,8 @@ class LoginController {
         this.model = model;
 
         this.view.loginSubmitEvent.addListener((data, formType) => { this.model.validate(data, formType) });
-        this.model.loginValidation.addListener(data => {this.view.updateValidation(data)});
+        this.model.loginValidation.addListener(data => { this.view.updateValidation(data) });
+        this.model.loginSubmit.addListener(data => {this.view.setLoginError()});
     }
 
     renderView() {

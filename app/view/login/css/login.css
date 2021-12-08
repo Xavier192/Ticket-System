@@ -22,8 +22,10 @@ html,body{
 
 body{
     font-family:'Poppins',sans-serif;
-    color:var(--text-color);
     font-size:16px;
+    background-image:url(../img/background.svg);
+    background-repeat:no-repeat;
+    background-size:cover;
 }
 
 a{
@@ -32,13 +34,8 @@ a{
 
 /*SECTION LOGIN*/
 
-main{
-   background-color:var(--background-color);
-}
-
 .login{
     height:700px;
-    background-color:#fff;
     max-width:1200px;
     margin:0 20px;
     border-radius:10px;
@@ -54,6 +51,7 @@ main{
     flex:1;
     position:relative;
     overflow:hidden;
+    background-color:rgba(255,255,255,1);
 }
 
 .login__form-container{
@@ -276,4 +274,28 @@ main{
     font-size:14px;
     padding:10px;
     box-shadow:0 0 10px #afafaf;
+}
+
+#failed-login{
+    color:#f00;
+}
+
+.d-none{
+    display:none;
+}
+
+@media screen and (max-width:870px){
+    .login__image, .login__form{
+        flex-basis:100%;
+    }
+    .flex{
+        flex-wrap:wrap;
+    }
+
+    .login__image{
+        height:400px;
+    }
+    .login__form{
+        height:100%;
+    }
 }

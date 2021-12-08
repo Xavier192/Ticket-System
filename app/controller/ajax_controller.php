@@ -1,4 +1,5 @@
 <?php
+
 defined('APPLICATION_PATH') || define('APPLICATION_PATH', realpath(dirname(__FILE__). '/..'));
 
 defined('DS') || define('DS',DIRECTORY_SEPARATOR);
@@ -14,7 +15,6 @@ function decideController($type, $operation){
     global $config;
     
     $loginPath = $config['path']['CONTROLLER_PATH']. DS . 'login_controller.php';
-
     $dictionary = ['login'=> $loginPath];
 
     require $dictionary[$type];

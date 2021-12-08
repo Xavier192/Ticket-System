@@ -25,34 +25,37 @@ class LoginModel{
         $preparedStatment = $this->prepareStatment($queryContent);
         $preparedStatment->execute($params);
 
-        return $preparedStatment -> FetchAll();
+        return ($preparedStatment -> FetchAll())[0];
+    }
+
+    function insert($queryContent, $params){
+        $preparedStatment = $this->prepareStatment($queryContent);
+        $preparedStatment->execute($params);
     }
 
     function verifyCode($code){
-        $result = $this->query('SELECT id_codigo from codigo WHERE id_codigo = ?', array($code));
+        $codeExists = $this->query('SELECT count(id_codigo) from codigo WHERE id_codigo = ?', array($code));
+        $codeIsUsed = $this -> query('SELECT count(codigo) from usuario WHERE codigo = ?', array($code));
 
-        if($result){
-            echo true;
-            return;
-        }
-        
-        echo false;
+        return ($codeExists[0] && !$codeIsUsed[0]);
+    }
+
+    function verifyUser($user){
+        $userExists = $this->query('SELECT count(id_usuario) FROM usuario WHERE alias = ?', array($user));
+
+        return $userExists[0];
     }
 
     function signUp($user, $password, $email, $code){
-        
-        $result = $this -> query('INSERT INTO usuario VALUES(0,?,?,?)');
+        $permissions = $this -> query('SELECT permiso FROM codigo WHERE id_codigo = ?', array($code));
+
+        $result = $this -> insert('INSERT INTO usuario VALUES(?,?,?,?,?,?,?)', array(0,$permissions[0],$user,$password, $email, $code,1));
     }
 
     function login($user, $password){
-        $result = $this->query('SELECT alias from usuario WHERE alias = ? and contrasenya = ? LIMIT 1', array($user,$password));
+        $result = $this->query('SELECT count(alias) from usuario WHERE alias = ? and contrasenya = ? LIMIT 1', array($user,$password));
         
-        if($result){
-            echo true;
-            return;
-        }
-
-        echo 'No te sabes la palabra magica jajjaja';
+        echo $result[0];
     }
 
 }
