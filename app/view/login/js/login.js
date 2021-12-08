@@ -1,23 +1,32 @@
 window.onload = function () {
     const slideContainer = document.querySelector('.login__form-container');
     const signUpSlide = document.querySelector('.login__form-signup');
+    const loginForm = document.querySelector('.login__form');
     const btnCancel = document.querySelector('.btn-cancel');
     const singUpButton = document.querySelector('.login__signup');
-    const width = slideContainer.getBoundingClientRect().width;
+    let width = slideContainer.getBoundingClientRect().width;
+    
 
-
+    document.body.onresize = function(){
+        width = slideContainer.getBoundingClientRect().width;
+        signUpSlide.style.left = width + 'px';
+    }
     /*MANAGE SLIDES*/
 
     signUpSlide.style.left = width + 'px';
 
     singUpButton.onclick = function () {
         slideContainer.style.transform = 'translateX(' + (-width) + 'px)';
+        loginForm.classList.add('signup');
     }
 
     btnCancel.onclick = function () {
         slideContainer.style.transform = 'translateX(0)';
+        loginForm.classList.remove('signup');
     }
 }
+
+
 
 class Event {
     constructor() {

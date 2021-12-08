@@ -26,6 +26,7 @@ body{
     background-image:url(../img/background.svg);
     background-repeat:no-repeat;
     background-size:cover;
+    background-attachment: fixed;
 }
 
 a{
@@ -296,6 +297,42 @@ a{
         height:400px;
     }
     .login__form{
-        height:100%;
+        height:500px;
+        transition:height .5s;
+        
+    }
+    .flex-center{
+        align-items: flex-start;
+    }
+    #form{
+        margin-top:50px;
+    }
+    .signup{
+        height:680px;
+    }
+}
+
+@media screen and (max-width:442px){
+    .login__image{
+        display:none;
+    }
+    .login{
+        width:100%;
+        height:auto;
+    }
+    .flex-center{
+        align-items:center;
+    }
+    .login__logo span{
+        font-size:20px;
+    }
+    .login__form{
+        border-radius:12px;
+    }
+    .btn{
+        font-size:16px;
+    }
+    .login__input{
+        font-size:14px;
     }
 }
