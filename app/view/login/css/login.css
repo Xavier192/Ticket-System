@@ -59,6 +59,10 @@ a{
     transition:transform .5s ease-in-out;
 }
 
+.login__form-login{
+    padding-top:70px;
+}
+
 .login__form-login, .login__form-signup{
     position:absolute;
 }
@@ -92,7 +96,7 @@ a{
 /*LOGIN FORM FORMULARY*/
 
 #form{
-    margin-top:100px;
+    margin-top:73px;
 }
 
 .login__element{
