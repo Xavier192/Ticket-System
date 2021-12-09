@@ -5,11 +5,15 @@ window.onload = function () {
     const btnCancel = document.querySelector('.btn-cancel');
     const singUpButton = document.querySelector('.login__signup');
     let width = slideContainer.getBoundingClientRect().width;
-    
+    let register = false;
 
     document.body.onresize = function(){
         width = slideContainer.getBoundingClientRect().width;
         signUpSlide.style.left = width + 'px';
+        if(register === 2){
+            slideContainer.style.transform = 'translateX(' + (-width) + 'px)';
+        }
+        
     }
     /*MANAGE SLIDES*/
 
@@ -18,11 +22,13 @@ window.onload = function () {
     singUpButton.onclick = function () {
         slideContainer.style.transform = 'translateX(' + (-width) + 'px)';
         loginForm.classList.add('signup');
+        register = 2;
     }
 
     btnCancel.onclick = function () {
         slideContainer.style.transform = 'translateX(0)';
         loginForm.classList.remove('signup');
+        register = 1;
     }
 }
 

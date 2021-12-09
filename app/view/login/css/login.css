@@ -293,9 +293,11 @@ a{
     .login__form-login{
         padding-top:0;
     }
+
     .login__image, .login__form{
         flex-basis:100%;
     }
+
     .flex{
         flex-wrap:wrap;
     }
@@ -303,11 +305,13 @@ a{
     .login__image{
         height:400px;
     }
+
     .login__form{
         height:500px;
         transition:height .5s;
         
     }
+    
     .flex-center{
         align-items: flex-start;
     }
