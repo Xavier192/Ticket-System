@@ -1,38 +1,62 @@
-window.onload = function () {
-    const slideContainer = document.querySelector('.login__form-container');
-    const signUpSlide = document.querySelector('.login__form-signup');
-    const loginForm = document.querySelector('.login__form');
-    const btnCancel = document.querySelector('.btn-cancel');
-    const singUpButton = document.querySelector('.login__signup');
-    let width = slideContainer.getBoundingClientRect().width;
-    let register = false;
-
-    document.body.onresize = function(){
-        width = slideContainer.getBoundingClientRect().width;
-        signUpSlide.style.left = width + 'px';
-        if(register === 2){
-            slideContainer.style.transform = 'translateX(' + (-width) + 'px)';
-        }
-        
-    }
-    /*MANAGE SLIDES*/
-
-    signUpSlide.style.left = width + 'px';
-
-    singUpButton.onclick = function () {
-        slideContainer.style.transform = 'translateX(' + (-width) + 'px)';
-        loginForm.classList.add('signup');
-        register = 2;
-    }
-
-    btnCancel.onclick = function () {
-        slideContainer.style.transform = 'translateX(0)';
-        loginForm.classList.remove('signup');
-        register = 1;
-    }
+window.onload = function(){
+    const slider = new Slider();
+    slider.init();
+    
+    const controller = new LoginController(new LoginView(), new LoginModel());
+    controller.renderView();
 }
 
+class Slider{
+    constructor(){
+        this.slideContainer = document.querySelector('.login__form-container');
+        this.signUpSlide = document.querySelector('.login__form-signup');
+        this.loginForm = document.querySelector('.login__form');
+        this.btnCancel = document.querySelector('.btn-cancel');
+        this.singUpButton = document.querySelector('.login__signup');
+        this.width = this.slideContainer.getBoundingClientRect().width;
+        this.register = false;
+        this.signUpSlide.style.left = this.width + 'px';
+    }
 
+    init(){
+        document.body.onresize = (e) => {this.resizeBody();}
+        this.singUpButton.addEventListener('click',(e) => {this.translateX(this.width)});
+        this.btnCancel.addEventListener('click',(e) => {this.translateX(0)});
+    }
+
+    translateX(amount){
+        this.slideContainer.style.transform = 'translateX(' + (-amount) + 'px)';
+        this.deleteAllValues();
+
+        if(amount > 0){
+            this.register = true;
+            this.loginForm.classList.add('signup');
+        }else{
+            this.register = false;
+            this.loginForm.classList.remove('signup');
+        }
+    }
+
+    resizeBody(){
+        this.width = this.slideContainer.getBoundingClientRect().width;
+        this.signUpSlide.style.left = this.width + 'px';
+
+        if(this.register){
+            this.slideContainer.style.transform = 'translateX(' + (-this.width) + 'px)';
+        }
+    }
+
+    deleteAllValues(){
+        const inputs = Array.from(this.slideContainer.querySelectorAll('input'));
+
+        inputs.forEach(input => {
+            if(!input.classList.contains('btn')){
+                input.value = null;
+            }
+        });
+    }
+
+}
 
 class Event {
     constructor() {
@@ -46,6 +70,22 @@ class Event {
     trigger(params, formType) {
         this.listeners.forEach(listener => { listener(params, formType) });
     }
+}
+
+class LoginController {
+    constructor(view, model) {
+        this.view = view;
+        this.model = model;
+
+        this.view.loginSubmitEvent.addListener((data, formType) => { this.model.validate(data, formType) });
+        this.model.loginValidation.addListener(data => { this.view.updateValidation(data) });
+        this.model.loginSubmit.addListener(data => {this.view.setLoginError()});
+    }
+
+    renderView() {
+        this.view.init();
+    }
+
 }
 
 class LoginModel {
@@ -298,25 +338,10 @@ class LoginView {
 
 }
 
-class LoginController {
-    constructor(view, model) {
-        this.view = view;
-        this.model = model;
 
-        this.view.loginSubmitEvent.addListener((data, formType) => { this.model.validate(data, formType) });
-        this.model.loginValidation.addListener(data => { this.view.updateValidation(data) });
-        this.model.loginSubmit.addListener(data => {this.view.setLoginError()});
-    }
 
-    renderView() {
-        this.view.init();
-    }
 
-}
 
-const controller = new LoginController(new LoginView(), new LoginModel());
-
-controller.renderView();
 
 
 

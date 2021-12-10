@@ -294,56 +294,60 @@ a{
         padding-top:0;
     }
 
+    .login{
+        margin:0 70px;
+        height:auto;
+        width:100%;
+    }
+
+    .container{
+        max-width:664px;
+        margin:auto;
+    }
+
     .login__image, .login__form{
         flex-basis:100%;
     }
 
-    .flex{
-        flex-wrap:wrap;
-    }
-
     .login__image{
-        height:400px;
+        display:none;
     }
 
     .login__form{
         height:500px;
         transition:height .5s;
-        
+        border-radius:12px;
     }
     
-    .flex-center{
-        align-items: flex-start;
-    }
     #form{
         margin-top:50px;
     }
     .signup{
         height:680px;
     }
+    
+}
+
+@media screen and (max-width:620px){
+    .login{
+        margin: 0 20px;
+    }
 }
 
 @media screen and (max-width:442px){
-    .login__image{
-        display:none;
-    }
-    .login{
-        width:100%;
-        height:auto;
-    }
     .flex-center{
         align-items:center;
     }
     .login__logo span{
         font-size:20px;
     }
-    .login__form{
-        border-radius:12px;
-    }
     .btn{
         font-size:16px;
     }
     .login__input{
         font-size:14px;
+    }
+    .login{
+        margin:0 10px;
     }
 }
