@@ -10,7 +10,6 @@
 
 :root{
     --text-color:#3a3a3a;
-    --background-color:#4a4a4a;
     --login-button-color:#048ABF;
     --sign-up-button-color:#F2921D;
 }
@@ -36,7 +35,7 @@ a{
 /*SECTION LOGIN*/
 
 .login{
-    height:700px;
+    height:615px;
     max-width:1200px;
     margin:0 20px;
     border-radius:10px;
@@ -53,6 +52,7 @@ a{
     position:relative;
     overflow:hidden;
     background-color:rgba(255,255,255,1);
+    border-radius:0 12px 12px 0;
 }
 
 .login__form-container{
@@ -60,7 +60,7 @@ a{
 }
 
 .login__form-login{
-    padding-top:70px;
+    padding-top:26px;
 }
 
 .login__form-login, .login__form-signup{
@@ -90,7 +90,7 @@ a{
 }
 
 .login__ticket{
-    width:30px;
+    width:50px;
 }
 
 /*LOGIN FORM FORMULARY*/
@@ -279,6 +279,17 @@ a{
     font-size:14px;
     padding:10px;
     box-shadow:0 0 10px #afafaf;
+}
+
+.error__icon{
+    width:35px;
+}
+
+.login__failed{
+    position:absolute;
+    top:45%;
+    transform:translateY(-50%);
+    margin-left:10px;
 }
 
 #failed-login{

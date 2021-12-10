@@ -23,8 +23,8 @@
                 <div class="login__form-login wh-100">
                     <div class="container">
                         <div class="login__logo">
-                            <img src="../app/view/login/img/ticket.svg" class="login__ticket">
-                            <span>Gestor de tickets</span> 
+                            <img src="../app/view/login/img/bug.svg" class="login__ticket">
+                            <span>Gestor de incidencias</span> 
                         </div>
                         <form id="form">
                             <div class="login__element">
@@ -39,7 +39,8 @@
                                 <span class="error_box">Rellene este campo</span>
                             </div>
                             <div class="login__element d-none" id="failed-login">
-                                <p>Username or password incorrect</p>
+                                <img src="../app/view/login/img/error.svg" alt="" class="error__icon">
+                                <span class="login__failed">Usuario o contraseña incorrectos</span>
                             </div>
                             <div class="login__element">
                                 <input type="submit" value="Entrar" class="login__input btn">
@@ -51,10 +52,7 @@
                 
                 <div class="login__form-signup wh-100">
                     <div class="container">
-                        <div class="login__logo">
-                            <img src="../app/view/login/img/ticket.svg" class="login__ticket">
-                            <span>Gestor de tickets</span> 
-                        </div>
+                        
                         <form id="login__register">
                             <div class="login__element">
                                 <label class="login__label">Nombre de usuario*</label>
