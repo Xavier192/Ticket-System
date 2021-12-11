@@ -15,7 +15,6 @@ class Slider{
         this.singUpButton = document.querySelector('.login__signup');
         this.width = this.slideContainer.getBoundingClientRect().width;
         this.register = false;
-        this.signUpSlide.style.left = this.width + 'px';
     }
 
     init(){
@@ -39,7 +38,6 @@ class Slider{
 
     resizeBody(){
         this.width = this.slideContainer.getBoundingClientRect().width;
-        this.signUpSlide.style.left = this.width + 'px';
 
         if(this.register){
             this.slideContainer.style.transform = 'translateX(' + (-this.width) + 'px)';

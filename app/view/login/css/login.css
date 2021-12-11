@@ -12,11 +12,11 @@
     --text-color:#3a3a3a;
     --login-button-color:#048ABF;
     --sign-up-button-color:#F2921D;
+    --input-color:#f0f0f0;
 }
 
 html,body{
-    width:100%;
-    height:100%;
+   height:100%;
 }
 
 body{
@@ -26,19 +26,22 @@ body{
     background-repeat:no-repeat;
     background-size:cover;
     background-attachment: fixed;
+    position:relative;
+    display:flex;
 }
 
-a{
-    text-decoration:none;
+.main{
+    margin:auto;
+    flex:1;
+    min-width:270px;
 }
-
-/*SECTION LOGIN*/
+/*LOGIN SECTION*/
 
 .login{
-    height:615px;
-    max-width:1200px;
-    margin:0 20px;
+    margin:auto;
+    max-width:1240px;
     border-radius:10px;
+    padding:20px;
 }
 
 /*DIRECT CHILDS OF LOGIN SECTION*/
@@ -55,16 +58,17 @@ a{
     border-radius:0 12px 12px 0;
 }
 
+/*LOGIN SLIDER AND DIRECT CHILDS*/
+
 .login__slider{
     transition:transform .5s ease-in-out;
-}
-
-.login__form-login{
-    padding-top:26px;
+    display:flex;
 }
 
 .login__form-login, .login__form-signup{
-    position:absolute;
+    position:relative;
+    min-width:100%;
+    flex:1;
 }
 
 /*LOGIN IMAGE <IMG>*/
@@ -79,8 +83,8 @@ a{
 .login__logo{
     display:flex;
     align-items:center;
-    margin-top:60px;
     font-weight:500;
+    padding-top:80px;
 }
 
 .login__logo span{
@@ -90,13 +94,13 @@ a{
 }
 
 .login__ticket{
-    width:50px;
+    width:46px;
 }
 
 /*LOGIN FORM FORMULARY*/
 
 #form{
-    margin-top:73px;
+   margin-top:65px;
 }
 
 .login__element{
@@ -107,13 +111,14 @@ a{
 .login__element:last-child{
     display:flex;
     column-gap:20px;
+    margin-bottom:0;
 }
 
 .login__input{
     padding:15px;
     padding-left:45px;
     border:none;
-    background-color:#f0f0f0;
+    background-color:var(--input-color);
     background-repeat:no-repeat;
     background-position: center left 3%;
     outline:2px solid transparent;
@@ -127,6 +132,14 @@ a{
 
 .password{
     background-image:url('../img/key-solid.svg');
+}
+
+.email{
+    background-image:url(../img/email.svg);
+}
+
+.rol{
+    background-image:url(../img/code.svg);
 }
 
 .login__input:focus{
@@ -168,14 +181,6 @@ a{
     background-color:var(--sign-up-button-color);
     border-color:var(--sign-up-button-color);
     color:#fff;
-}
-
-.email{
-    background-image:url(../img/email.svg);
-}
-
-.rol{
-    background-image:url(../img/code.svg);
 }
 
 /*SIGN UP FORMULARY*/
@@ -221,8 +226,8 @@ a{
 .container{
     max-width:440px;
     margin:auto;
-    height:100%;
     padding:0 20px;
+    position:relative;
 }
 
 .wh-100{
@@ -301,14 +306,8 @@ a{
 }
 
 @media screen and (max-width:870px){
-    .login__form-login{
-        padding-top:0;
-    }
-
     .login{
-        margin:0 70px;
         height:auto;
-        width:100%;
     }
 
     .container{
@@ -316,16 +315,11 @@ a{
         margin:auto;
     }
 
-    .login__image, .login__form{
-        flex-basis:100%;
-    }
-
     .login__image{
         display:none;
     }
 
     .login__form{
-        height:500px;
         transition:height .5s;
         border-radius:12px;
     }
@@ -333,22 +327,9 @@ a{
     #form{
         margin-top:50px;
     }
-    .signup{
-        height:680px;
-    }
-    
-}
-
-@media screen and (max-width:620px){
-    .login{
-        margin: 0 20px;
-    }
 }
 
 @media screen and (max-width:442px){
-    .flex-center{
-        align-items:center;
-    }
     .login__logo span{
         font-size:20px;
     }
@@ -359,6 +340,6 @@ a{
         font-size:14px;
     }
     .login{
-        margin:0 10px;
+        padding:5px;
     }
 }
