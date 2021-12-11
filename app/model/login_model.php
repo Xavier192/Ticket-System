@@ -33,6 +33,13 @@ class LoginModel{
         $preparedStatment->execute($params);
     }
 
+    function encryptPassword($input, $rounds = 10){
+          $crypt_options = [
+            'cost' => $rounds
+          ];
+          return password_hash($input, PASSWORD_BCRYPT, $crypt_options);
+    }
+
     function verifyCode($code){
         $codeExists = $this->query('SELECT count(id_codigo) from codigo WHERE id_codigo = ?', array($code));
         $codeIsUsed = $this -> query('SELECT count(codigo) from usuario WHERE codigo = ?', array($code));
