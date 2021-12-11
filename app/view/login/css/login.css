@@ -55,7 +55,7 @@ a{
     border-radius:0 12px 12px 0;
 }
 
-.login__form-container{
+.login__slider{
     transition:transform .5s ease-in-out;
 }
 

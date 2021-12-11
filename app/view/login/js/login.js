@@ -8,7 +8,7 @@ window.onload = function(){
 
 class Slider{
     constructor(){
-        this.slideContainer = document.querySelector('.login__form-container');
+        this.slideContainer = document.querySelector('.login__slider');
         this.signUpSlide = document.querySelector('.login__form-signup');
         this.loginForm = document.querySelector('.login__form');
         this.btnCancel = document.querySelector('.btn-cancel');
