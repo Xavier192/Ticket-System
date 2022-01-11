@@ -1,0 +1,83 @@
+<!--======================HIDDEN <H1> TITLE======================-->
+<header>
+        <h1 class="d-none">Gestor de errores</h1>
+    </header>
+    <!--======================MAIN CARD==============================-->
+    <main class="main">
+        <section class="login flex">
+            <div class="login__image">
+                <img src="img/login/boats_image.jpg" class="wh-100" alt="image">
+            </div>
+            <div class="login__form">
+                <div class="login__slider">
+                    <!--=========LOGIN FORM=============-->
+                    <div class="login__form-login">
+                        <div class="container">
+                            <div class="login__logo">
+                                <img src="img/login/bug.svg" class="login__bug" alt="">
+                                <h2 class="login__heading">Gestor de errores</h2> 
+                            </div>
+                            <form id="form">
+                                <div class="login__element">
+                                    <label class="login__label">Usuario</label>
+                                    <input type="text" class="login__input user w-100" placeholder="Tú nombre de usuario">
+                                    <span class="error_box">Rellene este campo</span>
+                                </div>
+                                <div class="login__element">
+                                    <label class="login__label">Contraseña</label>
+                                    <input type="password" placeholder="Tú contraseña" class="login__input password w-100">
+                                    <a href="#" class="login__forgot w-100">He olvidado mi constraseña</a>
+                                    <span class="error_box">Rellene este campo</span>
+                                </div>
+                                <div class="login__element d-none" id="failed-login">
+                                    <img src="img/login/error.svg" alt="" class="error__icon">
+                                    <span class="login__failed">Usuario o contraseña incorrectos</span>
+                                </div>
+                                <div class="login__element">
+                                    <input type="submit" value="Entrar" class="login__input btn">
+                                    <a href="#" class="login__signup btn">Registrarse</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--===========SIGN UP FORM==============-->
+                    <div class="login__form-signup">
+                        <div class="container">
+                        
+                            <form id="login__register">
+                                <div class="login__element">
+                                    <label class="login__label">Nombre de usuario*</label>
+                                    <input type="text" class="login__input user w-100">
+                                    <span class="error_box">Rellene este campo</span>
+                                </div>
+                                <div class="login__element">
+                                    <label class="login__label">E-mail*</label>
+                                    <input type="text" class="login__input w-100 email">
+                                    <span class="error_box">Rellene este campo</span>
+                                </div>
+                                <div class="login__element">
+                                    <label class="login__label">Contraseña*</label>
+                                    <input type="password" class="login__input password w-100">
+                                    <span class="error_box">Rellene este campo</span>
+                                </div>
+                                <div class="login__element">
+                                    <label class="login__label">Repita su contraseña*</label>
+                                    <input type="password" class="login__input password w-100">
+                                    <span class="error_box">Rellene este campo</span>
+                                </div>
+                                <div class="login__element">
+                                    <label class="login__label">Código de rol*</label>
+                                    <input type="text" class="login__input w-100 rol">
+                                    <span class="error_box">Rellene este campo</span>
+                                </div>
+                                <div class="login__element">
+                                    <input type="submit" value="Registrarse" class="login__input btn" id="cancel">
+                                    <button type="button" class="btn btn-cancel">Cancelar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>

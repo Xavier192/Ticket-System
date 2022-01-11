@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="52.533" height="44.5" viewBox="0 0 52.533 44.5">
+  <g id="Grupo_16" data-name="Grupo 16" transform="translate(-509.967 -43.5)">
+    <line id="Línea_1" data-name="Línea 1" y2="42.5" transform="translate(561.5 44.5)" fill="none" stroke="#d8d8d8" stroke-linecap="round" stroke-width="2"/>
+    <g id="search_black_24dp" transform="translate(509.967 47)">
+      <path id="Trazado_1" data-name="Trazado 1" d="M0,0H38.145V38.145H0Z" fill="none"/>
+      <path id="Trazado_2" data-name="Trazado 2" d="M22.867,20.483H21.611l-.445-.429a10.346,10.346,0,1,0-1.113,1.113l.429.445v1.256L28.43,30.8,30.8,28.43Zm-9.536,0a7.152,7.152,0,1,1,7.152-7.152A7.143,7.143,0,0,1,13.331,20.483Z" transform="translate(1.768 1.768)" fill="#517ea6"/>
+    </g>
+  </g>
+</svg>

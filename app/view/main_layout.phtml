@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="css/main_layout.css" type="text/css">
+    <script src="../app/lib/chart.js" defer></script>
+    <script src="js/main_layout.js" defer></script>
+</head>
+<body>
+    <header class="header">
+       <nav class="navbar">
+            <div class="container flex-between">
+                <div class="navbar__rol">
+                    <button type="button" aria-expanded="false" aria-label="displays the menu" class="navbar__toggler"></button>
+                    <img src="img/dashboard/user_account.svg" alt="" class="navbar__useraccount">
+                    <h2 class="navbar__title"><?php echo $_SESSION['user'];?></h2>
+                </div>
+                <div class="navbar__not">
+                    <img src="img/dashboard/bell_blue.svg" alt="" class="navbar__bell">
+                    <img src="img/dashboard/user_blue.svg" alt="" class="navbar__user">
+                </div>
+            </div>
+        </nav>
+    </header>
+    <aside class="aside">
+            <button type="button" aria-label="closes the menu" class="aside__close"></button>
+            <div class="aside__logo">
+                <img src="img/dashboard/logo.svg" alt="">
+            </div>
+            <ul class="aside__menu flex">
+                <li class="aside__item">
+                    <a href="?page=home" class="aside__link <?php echo isActive($page, 'home'); ?>"><img src="img/dashboard
+                    <?php echo $page==='home' ? '/dashboard_blue.svg' : '/dashboard.svg'; ?>" alt=""><span class="aside__text"></span>RESUMEN</span></a>
+                </li>
+                <li class="aside__item">
+                    <a href="?page=proyectos" class="aside__link <?php echo isActive($page, 'proyectos'); ?>"> <img src="img/dashboard<?php echo $page==='proyectos' ? '/project_blue.svg' : '/project.svg'; ?>" alt=""><span class="aside__text">PROYECTOS </span> </a>
+                </li>
+                <li class="aside__item">
+                    <a href="?page=usuarios" class="aside__link <?php echo isActive($page, 'usuarios'); ?>"> <img src="img/dashboard<?php echo $page==='usuarios' ? '/user_blue.svg' : '/user.svg'; ?>" alt=""><span class="aside__text"> USUARIOS </span></a>
+                </li>
+                <li class="aside__item">
+                    <a href="?page=tickets" class="aside__link <?php echo isActive($page, 'tickets'); ?>"> <img src="img/dashboard<?php echo $page==='tickets' ? '/ticket_blue.svg' : '/ticket.svg'; ?>" alt=""><span class="aside__text"> TICKETS </span></a></li>
+                <li class="aside__item">
+                    <a href="?page=calendario" class="aside__link <?php echo isActive($page, 'calendario'); ?>"> <img src="img/dashboard<?php echo $page==='calendario' ? '/calendar_blue.svg' : '/calendar.svg'; ?>" alt=""><span class="aside__text"> CALENDARIO </span></a>
+                </li>
+            </ul>
+    </aside>
+    
+
+    <?php require $main_content; ?>
+
+</body>
+</html>

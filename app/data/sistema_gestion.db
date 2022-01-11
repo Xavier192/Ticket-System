@@ -1,0 +1,87 @@
+DROP DATABASE sistema_gestion_tickets;
+
+CREATE DATABASE IF NOT EXISTS sistema_gestion_tickets;
+use sistema_gestion_tickets;
+
+
+CREATE TABLE IF NOT EXISTS Permiso(
+id_permiso INT primary key auto_increment,
+rol ENUM('Desarrollador','Visitante','Administrador'),
+escritura BIT,
+administracion BIT
+);
+
+CREATE TABLE IF NOT EXISTS Codigo(
+id_codigo varchar(40) primary key,
+permiso INT,
+FOREIGN KEY (permiso) REFERENCES Permiso(id_permiso) 
+);
+
+CREATE TABLE IF NOT EXISTS Usuario(
+id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+Permiso_id_permiso INT,
+alias VARCHAR(45),
+contrasenya VARCHAR(75),
+email varchar(50),
+codigo varchar(40),
+activo BIT,
+FOREIGN KEY (codigo) REFERENCES Codigo(id_codigo),
+FOREIGN KEY (Permiso_id_permiso) REFERENCES Permiso(id_permiso)
+);
+
+CREATE TABLE IF NOT EXISTS Proyecto(
+id_proyecto INT PRIMARY KEY AUTO_INCREMENT,
+nombre VARCHAR(25),
+descripcion VARCHAR(400),
+fecha_creacion VARCHAR(45),
+creador VARCHAR(45),
+max_tickets_abiertos INT
+);
+
+CREATE TABLE IF NOT EXISTS Ticket(
+	id_ticket INT PRIMARY KEY AUTO_INCREMENT,
+    Proyecto_id_proyecto INT,
+    prioridad ENUM('Alta', 'Media', 'Baja'),
+    tipo VARCHAR(25),
+    estado enum('Abierto', 'Cerrado' , 'En Proceso'),
+    fecha_creacion DATETIME,
+    creador VARCHAR(45),
+    fecha_modificacion DATETIME,
+    FOREIGN KEY (Proyecto_id_proyecto) REFERENCES Proyecto(id_proyecto)
+);
+
+CREATE TABLE IF NOT EXISTS Ticket_Usuario(
+	Ticket_id_ticket INT,
+    Usuario_id_usuario INT,
+    FOREIGN KEY (Ticket_id_ticket) REFERENCES Ticket(id_ticket),
+    FOREIGN KEY (Usuario_id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+CREATE TABLE IF NOT EXISTS Usuario_Proyecto(
+	Usuario_id_usuario INT,
+    Proyecto_id_proyecto INT,
+    FOREIGN KEY (Usuario_id_usuario) REFERENCES Usuario(id_usuario),
+    FOREIGN KEY (Proyecto_id_proyecto) REFERENCES Proyecto(id_proyecto)
+);
+
+CREATE TABLE IF NOT EXISTS Comentario(
+	id_comentario INT PRIMARY KEY AUTO_INCREMENT,
+    Ticket_id_ticket INT,
+    creador VARCHAR(45),
+    mensaje VARCHAR(45),
+    fecha_creacion DATETIME,
+    FOREIGN KEY (Ticket_id_ticket) REFERENCES Ticket(id_ticket)
+);
+
+ALTER TABLE permiso AUTO_INCREMENT = 1;
+
+INSERT INTO permiso VALUES(0,'Administrador',1,1);
+
+INSERT INTO codigo VALUES('0xaed12348123*^.&sdasd.,_.,ññsaw·$&43$31',1);
+INSERT INTO codigo VALUES('0xaed12348123*^^^dpodka1231&%lñg?¿"!3$31',1);
+INSERT INTO codigo VALUES('0xaed12348dfop/($!ªxSDfEqR=(fijf122·gg3$31',1);
+
+INSERT INTO codigo VALUES('0xaed12348123*^^^.&&qweoska.,ññsaw43$31',1);
+INSERT INTO Usuario VALUES(0,1,'xavier','1234','xavier01242@gmail.com','0xaed12348123*^^^.&&qweoska.,ññsaw43$31',1);
+
+

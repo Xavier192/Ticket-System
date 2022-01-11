@@ -1,0 +1,101 @@
+<main class="main">
+    <section>
+        <div class="container">
+            <h2 class="home__title">Resumen general</h2>
+            <div class="grid">
+            <div class="card card__small">
+                <div class="card__circle">
+                    <img src="img/dashboard/ticket.svg" alt="ticket">
+                </div>
+                <div class="card__text">
+                    <span class="card__number">50</span>
+                    <span class="card__text-text">Tickets activos</span>
+                </div>
+            </div>
+            <div class="card card__small">
+                <div class="card__circle">
+                    <img src="img/dashboard/important.svg" alt="ticket">
+                </div>
+                <div class="card__text">
+                    <span class="card__number">25</span>
+                    <span class="card__text-text">Tickets alta prioridad</span>
+                </div>
+            </div>
+            <div class="card card__small">
+            <div class="card__circle">
+                    <img src="img/dashboard/project.svg" alt="ticket">
+                </div>
+                <div class="card__text">
+                    <span class="card__number">100</span>
+                    <span class="card__text-text">Proyectos activos</span>
+                </div>
+            </div>
+            <div class="card card__small">
+                <div class="card__circle">
+                    <img src="img/dashboard/user.svg" alt="ticket">
+                </div>
+                <div class="card__text">
+                    <span class="card__number">25</span>
+                    <span class="card__text-text">Usuarios</span>
+                </div>
+            </div>
+            <div class="card card__large">
+                <h2 class="card__title">Tickets por prioridad</h2>
+                <div class="card__chard" style="position:relative;">
+                    <canvas id="myChart"></canvas>
+                </div>
+                
+            </div>
+            <div class="card card__medium">
+                <h2 class="card__title">Tickets por tipo</h2>
+                <div class="card__chard" style="position:relative;">
+                    <canvas id="typeChart"></canvas>
+                </div>
+            </div>
+            <div class="card card__large">
+                <h2 class="card__title">Tickets por estado</h2>
+                <div class="card__chard" style="position:relative;">
+                    <canvas id="stateChart"></canvas>
+                </div>
+            </div>
+            <div class="card card__medium">
+                <h2 class="card__title">Proyectos</h2>
+                <table class="card__table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Nº Tickets</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Bug Tracker</td>
+                            <td>20</td>
+                        </tr>
+                        <tr>
+                            <td>Project 2</td>
+                            <td>40</td>
+                        </tr>
+                        <tr>
+                            <td>Project 3</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>Bug Tracker</td>
+                            <td>20</td>
+                        </tr>
+                        <tr>
+                            <td>Project 2</td>
+                            <td>40</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<link rel="stylesheet" href="css/dashboard.css" type="text/css">
+<script src="js/dashboard.js"></script>
+

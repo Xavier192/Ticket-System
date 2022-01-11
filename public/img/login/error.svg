@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="64"
+   height="64"
+   viewBox="0 0 16.933333 16.933334"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="error.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     units="px"
+     inkscape:zoom="5.6568543"
+     inkscape:cx="-3.9774756"
+     inkscape:cy="41.630912"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:snap-others="true"
+     inkscape:snap-nodes="true"
+     inkscape:snap-global="true"
+     inkscape:snap-bbox="true" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       sodipodi:type="star"
+       style="fill:#ff0000;stroke:#ff0000;stroke-width:5.05992;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path952"
+       inkscape:flatsided="false"
+       sodipodi:sides="3"
+       sodipodi:cx="16.283287"
+       sodipodi:cy="20.975082"
+       sodipodi:r1="35.782768"
+       sodipodi:r2="17.891384"
+       sodipodi:arg1="-1.5707963"
+       sodipodi:arg2="-0.52359878"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 16.283288,-14.807686 15.494392,26.837076 15.494393,26.837077 -30.988786,0 -30.988787,-10e-7 L 0.78889385,12.02939 Z"
+       transform="matrix(0.24091312,0,0,0.24091312,4.6572046,4.8995754)"
+       inkscape:transform-center-y="-2.1551348" />
+    <circle
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:1.219;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path2501"
+       cx="8.5493488"
+       cy="12.617317"
+       r="0.44648436" />
+    <path
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:0.319977px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 6.8186921,5.0396599 H 10.298593 L 8.9550757,10.399684 H 8.1786744 Z"
+       id="path3765" />
+  </g>
+</svg>
