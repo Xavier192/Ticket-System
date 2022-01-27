@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/normalize.css" type="text/css">
-    <link rel="stylesheet" href="css/main_layout.css" type="text/css">
+    <link rel="stylesheet" href="css/prestyling/normalize.css" type="text/css">
+    <link rel="stylesheet" href="css/layout/main_layout.css" type="text/css">
     <script src="../app/lib/chart.js" defer></script>
     <script src="js/main_layout.js" defer></script>
 </head>
@@ -33,19 +33,19 @@
             </div>
             <ul class="aside__menu flex">
                 <li class="aside__item">
-                    <a href="?page=home" class="aside__link <?php echo isActive($page, 'home'); ?>"><img src="img/dashboard
-                    <?php echo $page==='home' ? '/dashboard_blue.svg' : '/dashboard.svg'; ?>" alt=""><span class="aside__text"></span>RESUMEN</span></a>
+                    <a href="dashboard" class="aside__link <?php echo isActive($main_content, 'home'); ?>"><img src="img/dashboard
+                    <?php echo setIconColor($main_content, 'home') ? '/dashboard_blue.svg' : '/dashboard.svg'; ?>" alt=""><span class="aside__text"></span>RESUMEN</span></a>
                 </li>
                 <li class="aside__item">
-                    <a href="?page=proyectos" class="aside__link <?php echo isActive($page, 'proyectos'); ?>"> <img src="img/dashboard<?php echo $page==='proyectos' ? '/project_blue.svg' : '/project.svg'; ?>" alt=""><span class="aside__text">PROYECTOS </span> </a>
+                    <a href="projects?numPage=1" class="aside__link <?php echo isActive($main_content, 'proyectos'); ?>"> <img src="img/dashboard<?php echo setIconColor($main_content, 'proyectos') ? '/project_blue.svg' : '/project.svg'; ?>" alt=""><span class="aside__text">PROYECTOS </span> </a>
                 </li>
                 <li class="aside__item">
-                    <a href="?page=usuarios" class="aside__link <?php echo isActive($page, 'usuarios'); ?>"> <img src="img/dashboard<?php echo $page==='usuarios' ? '/user_blue.svg' : '/user.svg'; ?>" alt=""><span class="aside__text"> USUARIOS </span></a>
+                    <a href="users" class="aside__link <?php echo isActive($main_content, 'usuarios'); ?>"> <img src="img/dashboard<?php echo setIconColor($main_content, 'usuarios') ? '/user_blue.svg' : '/user.svg'; ?>" alt=""><span class="aside__text"> USUARIOS </span></a>
                 </li>
                 <li class="aside__item">
-                    <a href="?page=tickets" class="aside__link <?php echo isActive($page, 'tickets'); ?>"> <img src="img/dashboard<?php echo $page==='tickets' ? '/ticket_blue.svg' : '/ticket.svg'; ?>" alt=""><span class="aside__text"> TICKETS </span></a></li>
+                    <a href="tickets" class="aside__link <?php echo isActive($main_content, 'tickets'); ?>"> <img src="img/dashboard<?php echo setIconColor($main_content, 'tickets') ? '/ticket_blue.svg' : '/ticket.svg'; ?>" alt=""><span class="aside__text"> TICKETS </span></a></li>
                 <li class="aside__item">
-                    <a href="?page=calendario" class="aside__link <?php echo isActive($page, 'calendario'); ?>"> <img src="img/dashboard<?php echo $page==='calendario' ? '/calendar_blue.svg' : '/calendar.svg'; ?>" alt=""><span class="aside__text"> CALENDARIO </span></a>
+                    <a href="calendar" class="aside__link <?php echo isActive($main_content, 'calendario'); ?>"> <img src="img/dashboard<?php echo setIconColor($main_content, 'calendario') ? '/calendar_blue.svg' : '/calendar.svg'; ?>" alt=""><span class="aside__text"> CALENDARIO </span></a>
                 </li>
             </ul>
     </aside>

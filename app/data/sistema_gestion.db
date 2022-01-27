@@ -6,13 +6,14 @@ use sistema_gestion_tickets;
 
 CREATE TABLE IF NOT EXISTS Permiso(
 id_permiso INT primary key auto_increment,
-rol ENUM('Desarrollador','Visitante','Administrador'),
-escritura BIT,
-administracion BIT
+rol ENUM('Project Manager','Invitado','Administrador', 'Desarrollador'),
+asignarse_tickets BIT,
+administracion_usuarios BIT,
+crear_proyectos BIT
 );
 
 CREATE TABLE IF NOT EXISTS Codigo(
-id_codigo varchar(40) primary key,
+id_codigo varchar(100) primary key,
 permiso INT,
 FOREIGN KEY (permiso) REFERENCES Permiso(id_permiso) 
 );
@@ -23,7 +24,7 @@ Permiso_id_permiso INT,
 alias VARCHAR(45),
 contrasenya VARCHAR(75),
 email varchar(50),
-codigo varchar(40),
+codigo varchar(100),
 activo BIT,
 FOREIGN KEY (codigo) REFERENCES Codigo(id_codigo),
 FOREIGN KEY (Permiso_id_permiso) REFERENCES Permiso(id_permiso)
@@ -74,14 +75,32 @@ CREATE TABLE IF NOT EXISTS Comentario(
 );
 
 ALTER TABLE permiso AUTO_INCREMENT = 1;
+ALTER TABLE codigo AUTO_INCREMENT = 1;
+ALTER TABLE usuario AUTO_INCREMENT = 1;
+ALTER TABLE proyecto AUTO_INCREMENT = 1;
 
-INSERT INTO permiso VALUES(0,'Administrador',1,1);
+INSERT INTO permiso VALUES(0,'Administrador',1,1,1);
+INSERT INTO permiso VALUES (0,'Project Manager', 1, 0, 1);
+INSERT INTO permiso VALUES (0, 'Desarrollador', 1, 0, 0);
+INSERT INTO permiso VALUES (0, 'Invitado', 0,0,0);
 
-INSERT INTO codigo VALUES('0xaed12348123*^.&sdasd.,_.,ññsaw·$&43$31',1);
-INSERT INTO codigo VALUES('0xaed12348123*^^^dpodka1231&%lñg?¿"!3$31',1);
+INSERT INTO codigo VALUES('0xaed12348123*^.sdasd.,_.,ññsaw·$43$31',1);
+INSERT INTO codigo VALUES('0xaed12348123*^^^dpodka1231lñg?¿"!3$31',1);
 INSERT INTO codigo VALUES('0xaed12348dfop/($!ªxSDfEqR=(fijf122·gg3$31',1);
+INSERT INTO codigo VALUES('0xaed12348123*^^^.qweoska.,ññsaw43$31',1);
 
-INSERT INTO codigo VALUES('0xaed12348123*^^^.&&qweoska.,ññsaw43$31',1);
-INSERT INTO Usuario VALUES(0,1,'xavier','1234','xavier01242@gmail.com','0xaed12348123*^^^.&&qweoska.,ññsaw43$31',1);
+INSERT INTO codigo VALUES('0xaed123ijeoiwAp^^*.,313dksaAdiasIOwknd@did',2);
+INSERT INTO codigo VALUES('0xaed1dakjsKHDjkdas*.^^^63#fdsk1234..,,dasIOAFJ´´?',2);
+INSERT INTO codigo VALUES('0xaed1dakjsKHDjkdas*.^^^63#fdsoasdkopa*._sJ´´?',2);
 
+INSERT INTO codigo VALUES('0xjs,._-/"·$""·oidhwqIJDIdjs1288jdwhIAUJ.,.',3);
+INSERT INTO codigo VALUES('0xjs,._dasl_sdañloasjIOAoASOjd*¨¨.ñ/UJ.,.',3);
+INSERT INTO codigo VALUES('0xjs,._dasl_.,¨¨``$"""·oidhwqIJDIdjs12hIAUJ.,.',3);
 
+INSERT INTO Proyecto VALUES (0, 'Gestor de incidencias', 'Gestor de tickets para repartir las tareas en el desarrollo de un proyecto', '12/01/2022', 'xavier', 20);
+
+INSERT INTO Proyecto VALUES (0, 'Regenite Web', 'Pagina web de una empresa de investigación ficticia', '02/01/2022', 'xavier', 10);
+
+INSERT INTO Proyecto VALUES(0, 'Weather App', 'Pagina web hecha en angular que recoge datos de una estacion meteorológica', '12/12/2021', 'xavier', 15);
+
+INSERT INTO Proyecto VALUES (0, 'Portfolio App', 'Pagina web hecha enangular que recoge los proyectos mas importantes', '22/02/2022', 'xavier', 7);

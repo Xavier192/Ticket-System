@@ -3,21 +3,6 @@ window.onload = function(){
     controller.renderView();
 }
 
-class Event {
-    constructor() {
-        this.listeners = [];
-    }
-
-    addListener(listener) {
-        this.listeners.push(listener);
-    }
-
-    trigger(params) {
-        this.listeners.forEach(listener => { listener(params) });
-    }
-
-}
-
 class DashboardModel {
     constructor() {
         this.priorityChart = null;

@@ -1,4 +1,4 @@
-@import 'prestyling.css';
+@import '../prestyling/prestyling.css';
 
 .main{
     margin-left:315px;
@@ -144,6 +144,10 @@
     .aside{
         transform:translateX(-100%);
         transition:transform .4s;
+    }
+
+    .main{
+        margin-left:0;
     }
 
     .aside__close{

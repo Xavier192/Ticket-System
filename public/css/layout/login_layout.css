@@ -37,7 +37,7 @@ html,body{
 body{
     font-family:'Poppins',sans-serif;
     font-size:16px;
-    background-image:url(../img/login/background.svg);
+    background-image:url(../../img/login/background.svg);
     background-repeat:no-repeat;
     background-size:cover;
     background-attachment: fixed;
@@ -163,19 +163,19 @@ body{
 }
 
 .user{
-    background-image: url(../img/login/user-solid.svg);
+    background-image: url(../../img/login/user-solid.svg);
 }
 
 .password{
-    background-image:url(../img/login/key-solid.svg);
+    background-image:url(../../img/login/key-solid.svg);
 }
 
 .email{
-    background-image:url(../img/login/email.svg);
+    background-image:url(../../img/login/email.svg);
 }
 
 .rol{
-    background-image:url(../img/login/code.svg);
+    background-image:url(../../img/login/code.svg);
 }
 
 .login__input:focus{

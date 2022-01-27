@@ -18,3 +18,4 @@ $config = [
 ];
 
 require $config["PATH"]["LIB_PATH"]. 'functions.php';
+require $config["PATH"]["LIB_PATH"]. 'router.php';

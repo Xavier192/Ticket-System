@@ -1,0 +1,49 @@
+<main class="main main-projects">
+    <section class="container">
+        <div class="card">
+        <div class="card__header flex-row">
+                <div class="card__title flex-row">
+                    <h2>PROYECTOS</h2>
+                    <img src="img/projects/plus.svg" alt="">
+                </div>
+                <div class="card__search">
+                    <input type="text" class="card__input" placeholder="Buscar proyecto">
+                </div>
+            </div>
+            <table class="card__table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Fecha creación</th>
+                        <th>Max tickets abiertos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach($projects->data as $project){
+                        echo '<tr>';
+                       foreach($project as $key => $column){
+                            echo "<td data-label=$key>".$column."</td>";
+                       }
+                        echo '</tr>';
+                    }
+                    
+                    ?>
+                </tbody>
+            </table>
+        <?php echo createLinks($projects, 5, 'pagination flex-row', 'pagination__page');?><!--<ul class="pagination flex-row">
+            <li class="pagination__page">Previous</li>
+            <li class="pagination__page active">1</li>
+            <li class="pagination__page">2</li>
+            <li class="pagination__page">3</li>
+            <li class="pagination__page">4</li>
+            <li class="pagination__page">5</li>
+            <li class="pagination__page">Next</li>
+        </ul>-->
+    </section>
+        </div>
+            
+</main>
+
+<link rel="stylesheet" href="css/pages/projects.css" type="text/css">

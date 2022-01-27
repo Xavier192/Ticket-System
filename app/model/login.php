@@ -1,41 +1,39 @@
 <?php
 
 $current_view = $config["PATH"]["VIEW_PATH"]. 'login'. DS;
+$layout='';
 
 switch(get('action')){
-
+     /*============================LOGIN DATABASE LOGIC===========================*/
     case 'login' : {
-        $layout='';
-        $user = get('user');
-        $password = get('password');
-        $passwordHash = query('SELECT contrasenya from usuario WHERE alias = ? LIMIT 1', array($user));
+        $passwordHash = query('SELECT contrasenya from usuario WHERE alias = ? LIMIT 1', array(get('user')));
         
         if($passwordHash){
-            echo password_verify($password, $passwordHash[0][0]);
+            $verify = password_verify(get('password'), $passwordHash[0]['contrasenya']);
 
-            if(password_verify($password, $passwordHash[0][0])){
+            if($verify){
                 $layout = 'main_layout.phtml';
-                startSession($user);
-            }  
+                startSession(get('user'));
+            }
+            
+            echo $verify;
         }
 
         else{
             echo false;
         }
-
+       
         break;
     }
 
+    /*===============================SIGN UP DATABASE LOGIC==============================*/
     case 'signup' : {
-        $layout = '';
-        $code = get('code');
-        $password = get('password');
+        
+        if(verifyCode(get('code')) && verifyUser(get('user'))){
+            $permissions = query('SELECT permiso FROM codigo WHERE id_codigo = ?', array(get('code')));
+            $password = encryptPassword(get('password'));
 
-        if(verify(get('code'),get('user'))){
-            $permissions = query('SELECT permiso FROM codigo WHERE id_codigo = ?', array($code));
-            $password = encryptPassword($password);
-
-            $result = insert('INSERT INTO usuario VALUES(?,?,?,?,?,?,?)', array(0,$permissions[0][0],get('user'),$password, get('email'), $code,1));
+            $result = insert('INSERT INTO usuario VALUES(?,?,?,?,?,?,?)', array(0,$permissions[0]['permiso'],get('user'),$password, get('email'), get('code'),1));
             
             echo true;
         }
@@ -44,34 +42,12 @@ switch(get('action')){
     }
 
     default: {
+        $layout = 'login_layout.phtml';
         $view = $current_view. 'login.phtml';
         break;
     }
 
 }
 
-function verify($code, $user){
-    if(!verifyCode($code)){
-        echo -2;
-        return false;
-    }if(verifyUser($user)){
-        echo -1;
-        return false;
-    }
 
-    return true;
-}
-
-function verifyCode($code){
-    $codeExists = query('SELECT count(id_codigo) from codigo WHERE id_codigo = ?', array($code));
-    $codeIsUsed = query('SELECT count(codigo) from usuario WHERE codigo = ?', array($code));
-
-    return ($codeExists[0][0] && !$codeIsUsed[0][0]);
-}
-
-function verifyUser($user){
-    $userExists = query('SELECT count(id_usuario) FROM usuario WHERE alias = ?', array($user));
-
-    return $userExists[0][0];
-}
 

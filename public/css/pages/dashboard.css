@@ -126,9 +126,7 @@
 }
 
 @media screen and (max-width:1100px){
-    .main{
-        margin-left:0;
-    }
+    
 }
 
 @media screen and (max-width:900px){
@@ -150,12 +148,17 @@
     .card__medium .card__chard{
         width:70%;
     }
-}
 
-@media screen and (max-width:450px){
+    .grid{
+        row-gap:30px;
+    }
+
     .card__large, .card__medium{
         margin-top:50px;
     }
+}
+
+@media screen and (max-width:450px){
 
     .card__small{
         align-content:center;

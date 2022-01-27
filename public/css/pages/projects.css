@@ -1,0 +1,172 @@
+.flex-row{
+    display:flex;
+    align-items:center;
+}
+.card__title,.card__search{
+    flex:1;
+}
+.card__search{
+    text-align:right;
+}
+
+.card{
+    background-color:#fff;
+    padding:30px 0;
+    border-radius:20px;
+    box-shadow:0 0 8px #ccc;
+    margin-bottom:50px;
+}
+
+.card__input{
+    background-image:url(../../img/projects/search_blue.svg) ;
+    background-repeat: no-repeat;
+    background-position:center left 2%;
+    padding:5px;
+    border:1px solid #999;
+    border-radius:12px;
+    padding-left:35px;
+    outline:1px solid transparent;
+}
+
+.card__input:focus{
+    outline-color:#39f;
+}
+
+.card__header{
+    margin-bottom:50px;
+    padding:0 45px;
+}
+
+.card__title h2{
+    color:var(--text-color);
+}
+
+.card__table{
+    border-collapse:collapse;
+    text-align:center;
+    width:100%;
+}
+
+.card__table tr, td, th{
+    padding:20px 30px;
+}
+
+thead{
+    background-color:var(--text-color);
+    color:#fff;
+}
+
+.card__title h2{
+    margin-right:20px;
+
+}
+
+.card__title img{
+    cursor:pointer;
+}
+
+.pagination{
+    justify-content:flex-end;
+    padding:0 45px;
+    margin-top:30px;
+}
+
+.pagination__page a{
+    color:var(--text-color);
+    padding:15px 20px;
+    border-radius:50%;
+}
+
+.pagination__page:first-child, .pagination__page:last-child{
+    font-size:25px;
+}
+
+.disabled{
+  pointer-events: none;
+  cursor: default;
+}
+
+.disabled a{
+    text-decoration: none;
+  color: #999;
+}
+
+@media screen and (max-width:649px){
+    .card__header{
+        flex-wrap:wrap;
+        gap:25px;
+    }
+    .card__title, .card__search{
+        flex-basis:100%;
+    }
+    .card__search{
+        text-align:left;
+        
+    }
+}
+
+@media screen and (max-width:700px){
+    .card__table thead{
+        display:none;
+    }
+
+    .main-projects .container{
+        padding:0;
+    }
+
+    .card__table, .card__table tbody, tr, td{
+        display:block;
+        width:100%;
+    }
+
+    .card__table tr{
+        margin-bottom:25px;
+    }
+
+    .card{
+        padding:30px 0;
+        border-radius:0;
+    }
+
+    .card__table tr,td, th{
+        padding:10px;
+    }
+
+    .card__table td{
+        text-align:right;
+        padding-left:50%;
+        position:relative;
+    }
+
+    .card__table td::before{
+        content: attr(data-label);
+        position:absolute;
+        left:0;
+        width:50%;
+        padding-left:15px;
+        font-size:15px;
+        font-weight:bold;
+        text-align:left;
+    }
+
+    .card__input{
+        width:100%;
+    }
+
+    .card__table td,th{
+        font-size:14px;
+    }
+
+    .card__header{
+        padding: 0 20px;
+    }
+
+    .pagination{
+        justify-content: center;
+    }
+
+    .pagination__page{
+        padding: 5px 10px;
+    }
+}
+
